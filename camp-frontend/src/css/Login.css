@@ -1,0 +1,24 @@
+.card.login-card {
+    margin: auto;
+    background-color: #f4f4f4;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  img.login-img {
+    width: 200px;
+    margin: auto;
+    display: block;
+  }
+  form.login-form {
+    margin: auto;
+    padding: 0 15%;
+  }
+  button.login-btn {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+  }
+  .center-col {
+    margin: auto;
+    padding-top: 3%;
+  }
+  

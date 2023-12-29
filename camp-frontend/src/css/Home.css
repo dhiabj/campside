@@ -1,0 +1,14 @@
+.center-col{
+    margin: auto;
+    padding-top: 32px;
+}
+
+.post-btn {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 6px;
+  }
+
+  .post-card {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }

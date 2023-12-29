@@ -1,0 +1,15 @@
+.card.register-card {
+    margin: auto;
+    background-color: #f4f4f4;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  img.register-img {
+    width: 200px;
+    margin: auto;
+    display: block;
+  }
+  
+  .center-col {
+    margin: auto;
+  }

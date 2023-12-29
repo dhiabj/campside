@@ -1,0 +1,47 @@
+.user {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    }
+
+.username{
+    display: inline;
+    margin-left: 10px;
+}
+
+.more-btn{
+    background: none;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .more-btn:hover{
+    box-shadow: 0 2px 4px darkslategray;
+  }
+
+  .more-btn:active{
+    background-color: white;
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+  }
+
+  .link{
+    text-decoration: unset;
+    color: unset;
+  }
+
+  .link:hover{
+    text-decoration: underline;
+    color: unset;
+  }

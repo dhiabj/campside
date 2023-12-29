@@ -1,0 +1,21 @@
+.user-profile {
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    box-shadow: 0 2px 4px darkslategray;
+}
+
+.center-col{
+    margin: auto;
+    padding-top: 32px;
+}
+
+.profile-card {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  
