@@ -1,15 +1,17 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import ProgressBar from "./ProgressBar";
-import UploadGallery from "./UploadGallery";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import UploadGallery from './UploadGallery';
+import { uploadMultipleFiles } from '../lib/utils';
+import { MutatingDots } from 'react-loader-spinner';
 
 const CreatePost = ({ userconnected, setPosts }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [availableNetwork, setAvailableNetwork] = useState("");
-  const [selectedFiles, setSelectedFiles] = useState("");
-  const [progress, setProgress] = useState(0);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [availableNetwork, setAvailableNetwork] = useState('');
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+  const [loading, setLoading] = useState(false);
 
   const onValueChange = (e) => {
     setAvailableNetwork(e.target.value);
@@ -19,48 +21,29 @@ const CreatePost = ({ userconnected, setPosts }) => {
     setSelectedFiles(files);
   };
 
-  const createPost = (e) => {
+  const createPost = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("availableNetwork", availableNetwork);
-    for (let i = 0; i < selectedFiles.length; i++) {
-      formData.append("gallery", selectedFiles[i]);
+    if (selectedFiles.length === 0) {
+      toast.error('Please select at least one image!');
+      return;
     }
-    formData.append("userId", userconnected._id);
-    //console.log(userId);
-    //console.log(post);
-
-    const config = {
-      onUploadProgress: (progressEvent) => {
-        setProgress(
-          parseInt(
-            Math.round((progressEvent.loaded * 100) / progressEvent.total)
-          )
-        );
-        //console.log(progress);
-      },
-      headers: { "content-type": "multipart/form-data" },
-    };
-
-    axios
-      .post(`http://localhost:8000/api/posts/add`, formData, config)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        const newPost = res.data;
-        if (res.status === 200) {
-          toast.success("Post added successfully!");
-          setPosts((prev) => [newPost, ...prev]);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
+    try {
+      setLoading(true);
+      const imgUrls = await uploadMultipleFiles(selectedFiles);
+      const res = await axios.post('http://localhost:8000/api/posts/add', {
+        title,
+        description,
+        availableNetwork,
+        gallery: imgUrls,
+        userId: userconnected._id,
       });
-    setTimeout(() => setProgress(0), 10000);
-    //console.log(selectedFiles);
+      toast.success('Post created successfully!');
+      setLoading(false);
+      setPosts((prev) => [res.data, ...prev]);
+    } catch (error) {
+      console.log(error);
+      toast.error('Error creating post!');
+    }
   };
 
   return (
@@ -134,7 +117,19 @@ const CreatePost = ({ userconnected, setPosts }) => {
             </div>
           </div>
           <UploadGallery setGallery={setFiles} />
-          <ProgressBar percentage={progress} />
+          {loading && (
+            <MutatingDots
+              visible={true}
+              height="100"
+              width="100"
+              color="#4fa94d"
+              secondaryColor="#4fa94d"
+              radius="12.5"
+              ariaLabel="mutating-dots-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          )}
           <button type="submit" className="btn btn-primary post-btn">
             Post
           </button>

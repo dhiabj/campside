@@ -1,10 +1,10 @@
-import axios from "axios";
-import moment from "moment";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Posts from "../components/Posts";
-import "../css/Profile.css";
+import axios from 'axios';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import Posts from '../components/Posts';
+import '../css/Profile.css';
 
 const Profile = () => {
   const [userconnected, setUserconnected] = useState({});
@@ -14,9 +14,9 @@ const Profile = () => {
   const [filteredposts, setFilteredposts] = useState(posts);
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (!token) {
-      navigate("/login");
+      navigate('/login');
     } else {
       //console.log(token);
       axios
@@ -29,8 +29,8 @@ const Profile = () => {
           if (res.data.user) {
             setUserconnected(res.data.user);
           } else {
-            localStorage.removeItem("token");
-            navigate("/login");
+            localStorage.removeItem('token');
+            navigate('/login');
           }
         });
     }
@@ -88,7 +88,7 @@ const Profile = () => {
             <div className="card mb-3 profile-card">
               {selecteduser.img && (
                 <img
-                  src={`http://localhost:8000/uploads/${selecteduser.img}`}
+                  src={selecteduser.img}
                   className="user-profile mt-3"
                   alt="pfp"
                 />
@@ -107,11 +107,11 @@ const Profile = () => {
                   </p>
                   <p className="card-text fw-semibold me-3">
                     <i className="fa-solid fa-cake-candles me-2"></i>
-                    Born {moment(selecteduser.birthday).format("LL")}
+                    Born {moment(selecteduser.birthday).format('LL')}
                   </p>
                   <p className="card-text fw-semibold">
                     <i className="fa-solid fa-calendar-days me-2"></i>
-                    Joined {moment(selecteduser.createdAt).format("MMM Do YY")}
+                    Joined {moment(selecteduser.createdAt).format('MMM Do YY')}
                   </p>
                 </div>
               </div>

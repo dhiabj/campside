@@ -1,9 +1,9 @@
-import axios from "axios";
-import moment from "moment";
-import React from "react";
-import { Link } from "react-router-dom";
-import Slider from "react-slick";
-import "../css/Posts.css";
+import axios from 'axios';
+import moment from 'moment';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+import '../css/Posts.css';
 
 const Posts = ({ post, userconnected, setPosts, setAllPosts }) => {
   const settings = {
@@ -58,11 +58,7 @@ const Posts = ({ post, userconnected, setPosts, setAllPosts }) => {
         <div className="mb-3 d-flex">
           <div>
             <Link to={`/profile/${post.userId?._id}`}>
-              <img
-                src={`http://localhost:8000/uploads/${post.userId?.img}`}
-                className="user"
-                alt="pfp"
-              />
+              <img src={post.userId?.img} className="user" alt="pfp" />
             </Link>
             <Link to={`/profile/${post.userId?._id}`} className="link">
               <p className="username fw-semibold me-2">
@@ -104,19 +100,14 @@ const Posts = ({ post, userconnected, setPosts, setAllPosts }) => {
         <p className="card-text">{post.availableNetwork}</p>
         <p className="card-text">
           <small className="text-muted">
-            {moment(post.createdAt).startOf("second").fromNow()}
+            {moment(post.createdAt).startOf('second').fromNow()}
           </small>
         </p>
       </div>
       <Slider {...settings}>
         {post.img.map((el) => {
           return (
-            <img
-              src={`http://localhost:8000/uploads/${el}`}
-              className="card-img-bottom"
-              alt="..."
-              key={el}
-            />
+            <img src={el} className="card-img-bottom" alt="..." key={el} />
           );
         })}
       </Slider>

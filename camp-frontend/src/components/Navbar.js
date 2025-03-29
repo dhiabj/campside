@@ -1,13 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import "../css/Navbar.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import '../css/Navbar.css';
 
 const Navbar = ({ userconnected, posts, setFilteredposts }) => {
   const navigate = useNavigate();
   const signOut = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
+    localStorage.removeItem('token');
+    navigate('/login');
   };
 
   const searchPosts = (e) => {
@@ -40,11 +40,7 @@ const Navbar = ({ userconnected, posts, setFilteredposts }) => {
         <div className="ms-auto d-flex">
           <Link to={`/profile/${userconnected._id}`} className="navbar-brand">
             {userconnected.img && (
-              <img
-                src={`http://localhost:8000/uploads/${userconnected.img}`}
-                className="pfp"
-                alt="pfp"
-              />
+              <img src={userconnected.img} className="pfp" alt="pfp" />
             )}
           </Link>
           <div className="dropdown">

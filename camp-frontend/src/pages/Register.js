@@ -1,72 +1,59 @@
-import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../css/Register.css";
-import logo from "../assets/camp-logo.png";
-import axios from "axios";
-import { toast } from "react-toastify";
-import UploadFile from "../components/UploadFile";
-import ProgressBar from "../components/ProgressBar";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../css/Register.css';
+import logo from '../assets/camp-logo.png';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import UploadFile from '../components/UploadFile';
+import { MutatingDots } from 'react-loader-spinner';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { uploadFile } from '../lib/utils';
 
 const Register = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [birthday, setBirthday] = useState(new Date());
-  const [address, setAddress] = useState("");
-  const [filename, setFilename] = useState("");
-  const [selectedFile, setSelectedFile] = useState("");
-  const [progress, setProgress] = useState(0);
+  const [address, setAddress] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const setFile = (file, filename) => {
+  const setFile = (file) => {
     setSelectedFile(file);
-    setFilename(filename);
   };
 
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("username", username);
-    formData.append("firstname", firstname);
-    formData.append("lastname", lastname);
-    formData.append("email", email);
-    formData.append("password", password);
-    formData.append("birthday", birthday);
-    formData.append("address", address);
-    formData.append("pfp", selectedFile, filename);
-    //console.log(selectedFile);
-
-    const config = {
-      onUploadProgress: (progressEvent) => {
-        setProgress(
-          parseInt(
-            Math.round((progressEvent.loaded * 100) / progressEvent.total)
-          )
-        );
-        //console.log(progress);
-      },
-      headers: { "content-type": "multipart/form-data" },
-    };
-    //console.log(user);
-    axios
-      .post(`http://localhost:8000/api/users/register`, formData, config)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data.status);
-        if (res.data.status === "ok") {
-          toast.success("Account created successfully!");
-          navigate("/login");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
+    if (!selectedFile) {
+      toast.error('Please select a profile picture!');
+      return;
+    }
+    try {
+      setLoading(true);
+      const imgUrl = await uploadFile(selectedFile);
+      //console.log('file', selectedFile, 'imageUrl', imgUrl);
+      await axios.post('http://localhost:8000/api/users/register', {
+        username,
+        firstname,
+        lastname,
+        email,
+        password,
+        birthday,
+        address,
+        img: imgUrl,
       });
+      toast.success('Account created successfully!');
+      setLoading(false);
+      navigate('/login');
+    } catch (error) {
+      console.log(error);
+      toast.error('Error creating account!');
+    }
   };
 
   return (
@@ -167,7 +154,19 @@ const Register = () => {
                 <div>
                   <label className="mb-3">Photo</label>
                   <UploadFile setPfp={setFile} />
-                  <ProgressBar percentage={progress} />
+                  {loading && (
+                    <MutatingDots
+                      visible={true}
+                      height="100"
+                      width="100"
+                      color="#4fa94d"
+                      secondaryColor="#4fa94d"
+                      radius="12.5"
+                      ariaLabel="mutating-dots-loading"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                    />
+                  )}
                 </div>
 
                 <div className="d-grid col-12 mx-auto">
