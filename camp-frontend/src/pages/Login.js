@@ -1,37 +1,36 @@
-import React from "react";
-import "../css/Login.css";
-import logo from "../assets/camp-logo.png";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import React from 'react';
+import '../css/Login.css';
+import logo from '../assets/camp-logo.png';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
-  const loginUser = (e) => {
+  const loginUser = async (e) => {
     e.preventDefault();
     const user = {
       email: email,
       password: password,
     };
 
-    axios
-      .post(`http://localhost:8000/api/users/login`, { ...user })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        if (res.data.status === "ok") {
-          localStorage.setItem("token", res.data.user);
-          toast.success("Login successful!");
-          navigate("/home");
-        } else {
-          toast.error("Please check your username and password!");
-        }
-      });
+    try {
+      const res = await axios.post(
+        'http://localhost:8000/api/users/login',
+        user
+      );
+      localStorage.setItem('token', res.data.user);
+      toast.success('Login successful!');
+      navigate('/home');
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.error);
+    }
   };
 
   return (
@@ -70,9 +69,9 @@ const Login = () => {
                 <button type="submit" className="btn btn-primary login-btn">
                   Sign In
                 </button>
-                <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
-                  Don't have an account?{" "}
-                  <Link to="/register" style={{ color: "#393f81" }}>
+                <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
+                  Don't have an account?{' '}
+                  <Link to="/register" style={{ color: '#393f81' }}>
                     Register here
                   </Link>
                 </p>

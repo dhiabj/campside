@@ -37,7 +37,7 @@ const Register = () => {
       setLoading(true);
       const imgUrl = await uploadFile(selectedFile);
       //console.log('file', selectedFile, 'imageUrl', imgUrl);
-      await axios.post('http://localhost:8000/api/users/register', {
+      const res = await axios.post('http://localhost:8000/api/users/register', {
         username,
         firstname,
         lastname,
@@ -47,7 +47,7 @@ const Register = () => {
         address,
         img: imgUrl,
       });
-      toast.success('Account created successfully!');
+      toast.success(res.data.message);
       setLoading(false);
       navigate('/login');
     } catch (error) {
