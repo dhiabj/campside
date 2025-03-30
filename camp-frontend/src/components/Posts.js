@@ -16,7 +16,9 @@ const Posts = ({ post, userconnected, setPosts, setAllPosts }) => {
 
   const refreshPosts = () => {
     axios
-      .get(`http://localhost:8000/api/posts/${userconnected._id}`)
+      .get(
+        `${process.env.REACT_APP_BACKEND_BASEURL}/posts/${userconnected._id}`
+      )
       .then((res) => {
         //console.log(res);
         //console.log(res.data);
@@ -29,7 +31,7 @@ const Posts = ({ post, userconnected, setPosts, setAllPosts }) => {
       });
 
     axios
-      .get(`http://localhost:8000/api/posts/`)
+      .get(`${process.env.REACT_APP_BACKEND_BASEURL}/posts/`)
       .then((res) => {
         //console.log(res);
         //console.log(res.data);
@@ -44,7 +46,7 @@ const Posts = ({ post, userconnected, setPosts, setAllPosts }) => {
 
   const deletePost = (id) => {
     axios
-      .delete(`http://localhost:8000/api/posts/delete/${id}`)
+      .delete(`${process.env.REACT_APP_BACKEND_BASEURL}/posts/delete/${id}`)
       .then((res) => {
         console.log(res);
         refreshPosts();

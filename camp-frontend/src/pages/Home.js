@@ -1,11 +1,11 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "../css/Home.css";
-import CreatePost from "../components/CreatePost";
-import Navbar from "../components/Navbar";
-import Posts from "../components/Posts";
+import React from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import '../css/Home.css';
+import CreatePost from '../components/CreatePost';
+import Navbar from '../components/Navbar';
+import Posts from '../components/Posts';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -14,13 +14,13 @@ const Home = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (!token) {
-      navigate("/login");
+      navigate('/login');
     } else {
       //console.log(token);
       axios
-        .get(`http://localhost:8000/api/users/userconnected`, {
+        .get(`${process.env.REACT_APP_BACKEND_BASEURL}/users/userconnected`, {
           headers: { authorization: token },
         })
         .then((res) => {
@@ -29,13 +29,13 @@ const Home = () => {
           if (res.data.user) {
             setUserconnected(res.data.user);
           } else {
-            localStorage.removeItem("token");
-            navigate("/login");
+            localStorage.removeItem('token');
+            navigate('/login');
           }
         });
 
       axios
-        .get(`http://localhost:8000/api/posts`, {
+        .get(`${process.env.REACT_APP_BACKEND_BASEURL}/posts`, {
           headers: { authorization: token },
         })
         .then((res) => {

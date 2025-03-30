@@ -37,16 +37,19 @@ const Register = () => {
       setLoading(true);
       const imgUrl = await uploadFile(selectedFile);
       //console.log('file', selectedFile, 'imageUrl', imgUrl);
-      const res = await axios.post('http://localhost:8000/api/users/register', {
-        username,
-        firstname,
-        lastname,
-        email,
-        password,
-        birthday,
-        address,
-        img: imgUrl,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASEURL}/users/register`,
+        {
+          username,
+          firstname,
+          lastname,
+          email,
+          password,
+          birthday,
+          address,
+          img: imgUrl,
+        }
+      );
       toast.success(res.data.message);
       setLoading(false);
       navigate('/login');

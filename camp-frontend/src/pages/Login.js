@@ -21,7 +21,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        'http://localhost:8000/api/users/login',
+        `${process.env.REACT_APP_BACKEND_BASEURL}/users/login`,
         user
       );
       localStorage.setItem('token', res.data.user);

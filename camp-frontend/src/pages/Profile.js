@@ -20,7 +20,7 @@ const Profile = () => {
     } else {
       //console.log(token);
       axios
-        .get(`http://localhost:8000/api/users/userconnected`, {
+        .get(`${process.env.REACT_APP_BACKEND_BASEURL}/users/userconnected`, {
           headers: { authorization: token },
         })
         .then((res) => {
@@ -40,7 +40,7 @@ const Profile = () => {
   useEffect(() => {
     if (!id) return;
     axios
-      .get(`http://localhost:8000/api/posts/${id}`)
+      .get(`${process.env.REACT_APP_BACKEND_BASEURL}/posts/${id}`)
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -56,7 +56,7 @@ const Profile = () => {
   useEffect(() => {
     if (!id) return;
     axios
-      .get(`http://localhost:8000/api/users/user/${id}`)
+      .get(`${process.env.REACT_APP_BACKEND_BASEURL}/users/user/${id}`)
       .then((res) => {
         console.log(res);
         console.log(res.data);

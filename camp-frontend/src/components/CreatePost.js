@@ -30,13 +30,16 @@ const CreatePost = ({ userconnected, setPosts }) => {
     try {
       setLoading(true);
       const imgUrls = await uploadMultipleFiles(selectedFiles);
-      const res = await axios.post('http://localhost:8000/api/posts/add', {
-        title,
-        description,
-        availableNetwork,
-        gallery: imgUrls,
-        userId: userconnected._id,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASEURL}/posts/add`,
+        {
+          title,
+          description,
+          availableNetwork,
+          gallery: imgUrls,
+          userId: userconnected._id,
+        }
+      );
       toast.success('Post created successfully!');
       setLoading(false);
       setPosts((prev) => [res.data, ...prev]);
