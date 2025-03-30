@@ -75,5 +75,5 @@ A social network for camping enthusiasts to share experiences, connect with fell
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/campsite.git
+git clone https://github.com/dhiabj/campsite.git
 cd campsite
