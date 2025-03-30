@@ -15,6 +15,8 @@ app.use(
   })
 );
 
+app.options('*', cors());
+
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
