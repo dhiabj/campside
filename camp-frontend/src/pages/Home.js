@@ -20,9 +20,12 @@ const Home = () => {
     } else {
       //console.log(token);
       axios
-        .get(`${process.env.REACT_APP_BACKEND_BASEURL}/users/userconnected`, {
-          headers: { authorization: token },
-        })
+        .get(
+          `${process.env.REACT_APP_BACKEND_BASEURL}/api/users/userconnected`,
+          {
+            headers: { authorization: token },
+          }
+        )
         .then((res) => {
           console.log(res);
           console.log(res.data);
@@ -35,7 +38,7 @@ const Home = () => {
         });
 
       axios
-        .get(`${process.env.REACT_APP_BACKEND_BASEURL}/posts`, {
+        .get(`${process.env.REACT_APP_BACKEND_BASEURL}/api/posts`, {
           headers: { authorization: token },
         })
         .then((res) => {

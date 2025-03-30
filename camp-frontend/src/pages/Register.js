@@ -38,7 +38,7 @@ const Register = () => {
       const imgUrl = await uploadFile(selectedFile);
       //console.log('file', selectedFile, 'imageUrl', imgUrl);
       const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_BASEURL}/users/register`,
+        `${process.env.REACT_APP_BACKEND_BASEURL}/api/users/register`,
         {
           username,
           firstname,

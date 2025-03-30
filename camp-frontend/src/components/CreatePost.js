@@ -31,7 +31,7 @@ const CreatePost = ({ userconnected, setPosts }) => {
       setLoading(true);
       const imgUrls = await uploadMultipleFiles(selectedFiles);
       const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_BASEURL}/posts/add`,
+        `${process.env.REACT_APP_BACKEND_BASEURL}/api/posts/add`,
         {
           title,
           description,
