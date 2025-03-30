@@ -2,7 +2,8 @@
 
 A social network for camping enthusiasts to share experiences, connect with fellow campers, and discover new camping locations. Built using the MERN stack (MongoDB, Express.js, React, Node.js).
 
-![Campsite Preview](https://via.placeholder.com/800x400.png?text=Campsite+Screenshot) <!-- Add your screenshot here -->
+![preview](https://github.com/user-attachments/assets/28017539-59a7-4413-8267-e4ee8b4dceba)
+
 
 ## Features
 
@@ -41,6 +42,7 @@ A social network for camping enthusiasts to share experiences, connect with fell
 
 ### Frontend
 - React.js
+- Bootstrap 5
 - React Router
 - React Toastify
 - React Dropzone
