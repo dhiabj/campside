@@ -1,0 +1,49 @@
+# Camp Frontend Ignore Rules
+/camp-frontend/node_modules
+/camp-frontend/.pnp
+/camp-frontend/.pnp.js
+
+# testing
+/camp-frontend/coverage
+
+# production
+/camp-frontend/build
+
+# misc
+/camp-frontend/.DS_Store
+/camp-frontend/.env.local
+/camp-frontend/.env.development.local
+/camp-frontend/.env.test.local
+/camp-frontend/.env.production.local
+/camp-frontend/.env
+
+# logs
+/camp-frontend/npm-debug.log*
+/camp-frontend/yarn-debug.log*
+/camp-frontend/yarn-error.log*
+
+
+# Camp Backend Ignore Rules
+/camp-backend/node_modules
+/camp-backend/.pnp
+/camp-backend/.pnp.js
+
+# testing
+/camp-backend/coverage
+
+# production
+/camp-backend/build
+
+# misc
+/camp-backend/.DS_Store
+/camp-backend/.env.local
+/camp-backend/.env.development.local
+/camp-backend/.env.test.local
+/camp-backend/.env.production.local
+/camp-backend/.env
+
+
+# logs
+/camp-backend/npm-debug.log*
+/camp-backend/yarn-debug.log*
+/camp-backend/yarn-error.log*
